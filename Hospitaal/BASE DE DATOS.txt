@@ -1,0 +1,57 @@
+
+      create database hospital;
+use hospital;
+
+
+
+
+CREATE TABLE Medico (
+    idMedico INT PRIMARY KEY,
+    NombreMed VARCHAR(50),
+    ApellidoMed VARCHAR(50),
+    RunMed VARCHAR(50),
+    Eunacom VARCHAR(5),
+    NacionalidadMed VARCHAR(45),
+    Especialidad VARCHAR(45),
+    Horarios TIME,
+    TarifaHr INT
+);
+
+CREATE TABLE Paciente (
+    idPaciente INT PRIMARY KEY,
+    NombrePac VARCHAR(50),
+    ApellidoPac VARCHAR(50),
+    RunPac VARCHAR(25),
+    Nacionalidad VARCHAR(50),
+    Visa VARCHAR(5),
+    Genero VARCHAR(10),
+    SintomasPac VARCHAR(100),
+    Medico_idMedico INT,
+    FOREIGN KEY (Medico_idMedico) REFERENCES Medico(idMedico)
+);
+
+CREATE TABLE Reserva (
+    idReserva INT PRIMARY KEY,
+    Especialidad VARCHAR(45),
+    DiaReserva DATE,
+    Paciente_idPaciente INT,
+    FOREIGN KEY (Paciente_idPaciente) REFERENCES Paciente(idPaciente)
+);
+
+INSERT INTO Medico (idMedico, NombreMed, ApellidoMed, RunMed, Eunacom, NacionalidadMed, Especialidad, Horarios, TarifaHr)
+VALUES (2, 'Pedro', 'Rodriguez', '23456789', 'S', 'Chileno', 'Pediatría', '09:00', 1500),
+       (3, 'Carolina', 'Sánchez', '109876543', 'N', 'Chilena', 'Psiquiatría', '10:00', 2500),
+       (4, 'Juan', 'Pérez', '309876543', 'S', 'Chileno', 'Cardiología', '11:00', 2000);
+
+INSERT INTO Paciente (idPaciente, NombrePac, ApellidoPac, RunPac, Nacionalidad, Visa, Genero, SintomasPac, Medico_idMedico)
+VALUES (2, 'Luis', 'Torres', '98765432', 'Chileno', 'N', 'Masculino', 'Congestión nasal', 2),
+       (3, 'Sofía', 'Vargas', '209876543', 'Chilena', 'N', 'Femenino', 'Diarrea', 3),
+       (4, 'Carla', 'Castro', '409876543', 'Chilena', 'N', 'Femenino', 'Cabeza', 4);
+
+INSERT INTO Reserva (idReserva, Especialidad, DiaReserva, Paciente_idPaciente)
+VALUES (2, 'Pediatría', '2022-01-02', 2),
+       (3, 'Psiquiatría', '2022-01-03', 3),
+       (4, 'Cardiología', '2022-01-04', 4);
+       
+
+       select * from Medico
